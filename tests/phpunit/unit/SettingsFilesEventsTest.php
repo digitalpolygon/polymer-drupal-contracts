@@ -61,4 +61,38 @@ class SettingsFilesEventsTest extends TestCase
         $event->setSite('multisite_a');
         $this->assertSame('multisite_a', $event->getSite());
     }
+
+    public function testCollectEventPreservesContributionOrder(): void
+    {
+        $event = new CollectSettingsFilesEvent();
+        $event->addSettingsFile('zulu', 'z');
+        $event->addSettingsFile('alpha', 'a');
+        $event->addSettingsFile('mike', 'm');
+        // Snippets are assembled in contribution order, not key order.
+        $this->assertSame(['zulu', 'alpha', 'mike'], array_keys($event->getSettingsFiles()));
+    }
+
+    public function testAlterEventPreservesProvidedOrder(): void
+    {
+        $event = new AlterSettingsFilesEvent();
+        $event->setSettingsFiles(['zulu' => 'z', 'alpha' => 'a']);
+        $this->assertSame(['zulu', 'alpha'], array_keys($event->getSettingsFiles()));
+    }
+
+    /**
+     * The BC surface itself: event classes are final (consumers listen, they
+     * do not extend) and PSR-14 stoppable via the Symfony contracts base.
+     */
+    public function testContractSurface(): void
+    {
+        foreach ([CollectSettingsFilesEvent::class, AlterSettingsFilesEvent::class] as $class) {
+            $reflection = new \ReflectionClass($class);
+            $this->assertTrue($reflection->isFinal(), "$class must be final");
+            $this->assertTrue(
+                $reflection->isSubclassOf(\Symfony\Contracts\EventDispatcher\Event::class),
+                "$class must extend the Symfony contracts Event"
+            );
+        }
+        $this->assertTrue((new \ReflectionClass(DrupalSettingsEvents::class))->isFinal());
+    }
 }
