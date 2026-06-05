@@ -38,6 +38,11 @@
             "DigitalPolygon\\PolymerDrupalContractsTest\\": "tests/"
         }
     },
+    "extra": {
+        "branch-alias": {
+            "dev-0.x": "0.2.x-dev"
+        }
+    },
     "config": {
         "allow-plugins": {
             "phpstan/extension-installer": true
