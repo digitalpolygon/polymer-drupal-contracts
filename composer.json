@@ -1,0 +1,44 @@
+{
+    "name": "digitalpolygon/polymer-drupal-contracts",
+    "type": "library",
+    "description": "Stable PSR-14 event contracts shared across the Polymer Drupal family. A normal PSR-4 library, not a runtime-loaded Polymer extension.",
+    "license": "GPL-2.0-only",
+    "authors": [
+        {
+            "name": "Digital Polygon Engineering",
+            "homepage": "https://www.digitalpolygon.com/",
+            "role": "Maintainer"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/digitalpolygon/polymer-drupal-contracts/issues",
+        "source": "https://github.com/digitalpolygon/polymer-drupal-contracts"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "php": ">=8.1",
+        "symfony/event-dispatcher-contracts": "^2.5 || ^3"
+    },
+    "require-dev": {
+        "php-parallel-lint/php-parallel-lint": "^1.4",
+        "phpstan/extension-installer": "^1.4",
+        "phpstan/phpstan": "^1.11",
+        "squizlabs/php_codesniffer": "^3"
+    },
+    "autoload": {
+        "psr-4": {
+            "DigitalPolygon\\Polymer\\Drupal\\Contracts\\": "src/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "phpstan/extension-installer": true
+        }
+    },
+    "scripts": {
+        "lint": "find src -name '*.php' -print0 | xargs -0 -n1 -P4 -- php -l",
+        "cs": "phpcs --report=full -s",
+        "sa": "phpstan analyse -v -c phpstan.neon"
+    }
+}

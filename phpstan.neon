@@ -1,0 +1,10 @@
+parameters:
+    level: 6
+    paths:
+        - src
+    # The event payloads set $site via setSite() immediately after construction
+    # (they are resolved from the container, then populated), so treat it as a
+    # constructor for the uninitialized-property check.
+    additionalConstructors:
+        - DigitalPolygon\Polymer\Drupal\Contracts\Event\CollectSettingsFilesEvent::setSite
+        - DigitalPolygon\Polymer\Drupal\Contracts\Event\AlterSettingsFilesEvent::setSite
