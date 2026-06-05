@@ -1,3 +1,8 @@
+> [!IMPORTANT]
+> This repository is a **read-only split mirror** of [`packages/drupal-contracts`](https://github.com/digitalpolygon/polymer-drupal-monorepo/tree/0.x/packages/drupal-contracts)
+> in the [polymer-drupal-monorepo](https://github.com/digitalpolygon/polymer-drupal-monorepo).
+> Development happens there — please open issues and pull requests against the monorepo.
+
 # Polymer Drupal Contracts
 
 Stable, dependency-light event contracts shared across the Polymer Drupal family.
